@@ -1,0 +1,15 @@
+import cx_Oracle
+from os import environ
+
+with cx_Oracle.connect(
+            environ.get('USERNAME'),
+            environ.get('PASSWORD'),
+            f"{environ.get('HOST')}:{environ.get('PORT')}/{environ.get('ORACLE_DB')}",
+            encoding="UTF-8"
+        ) as con:
+    cur = con.cursor()
+    cur.execute('select current_date from dual')
+    print(cur.fetchall())
+    # Execute the query
+
+# Connection will be closed here. con.close()
